@@ -85,7 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -151,16 +150,18 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',  # бэкенд аутентификации, предоставленный пакетом allauth
 ]
 
-ACCOUNT_EMAIL_REQUIRED = True            # поле email является обязательным
-ACCOUNT_UNIQUE_EMAIL = True              # поле email является уникальным
-ACCOUNT_USERNAME_REQUIRED = False        # username необязательный
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  # аутентификация будет происходить посредством электронной почты
-ACCOUNT_EMAIL_VERIFICATION = 'none'      # верификация почты отсутствует
-ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}
+ACCOUNT_EMAIL_REQUIRED = True             # поле email является обязательным
+ACCOUNT_UNIQUE_EMAIL = True               # поле email является уникальным
+ACCOUNT_USERNAME_REQUIRED = False         # username необязательный
+ACCOUNT_AUTHENTICATION_METHOD = 'email'   # аутентификация будет происходить посредством электронной почты
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # верификация почты отсутствует
+ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}  # Указали форму для дополнительной обработки регистрации пользователя
+# ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # позволит избежать дополнительного входа и активирует аккаунт сразу, как только мы перейдём по ссылке
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # хранит количество дней, когда доступна ссылка на подтверждение регистрации
 
+# Настройки почты
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # для отправки писем на реальные почтовые адреса
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Для тестирования, печать писем в консоль.
-
 EMAIL_HOST = 'smtp.yandex.ru'                                # хост почтового сервера
 EMAIL_PORT = 465                                             # порт, на который почтовый сервер принимает письма
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')          # логин пользователя почтового сервера
