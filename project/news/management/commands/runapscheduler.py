@@ -17,6 +17,7 @@ from news.models import Record, Category
 logger = logging.getLogger(__name__)
 
 
+# наша задача по выводу текста на экран
 def my_job():
     today = datetime.datetime.now()  # определяем текущее время
     last_week = today - datetime.timedelta(days=7)  # берем первоначальную точку отсчета 7 дней назад
@@ -43,6 +44,7 @@ def my_job():
     msg.send()
 
 
+# функция, которая будет удалять неактуальные задачи
 @util.close_old_connections
 def delete_old_job_executions(max_age=604_800):
     DjangoJobExecution.objects.delete_old_job_executions(max_age)
@@ -55,10 +57,11 @@ class Command(BaseCommand):
         scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
+        # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(minute="5"),
-            id="my_job",  # The `id` assigned to each job MUST be unique
+            trigger=CronTrigger(second="*/10"),  # то же, что и интервал
+            id="my_job",  # уникальный id
             max_instances=1,
             replace_existing=True,
         )
@@ -69,6 +72,7 @@ class Command(BaseCommand):
             trigger=CronTrigger(
                 day_of_week="mon", hour="00", minute="00"
             ),
+            # каждую неделю будут удаляться старые задачи, которые не удалось выполнить или выполнять уже не надо
             id="delete_old_job_executions",
             max_instances=1,
             replace_existing=True,

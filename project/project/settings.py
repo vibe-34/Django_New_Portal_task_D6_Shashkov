@@ -57,6 +57,8 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+SITE_URL = 'http://127.0.0.1:8000'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -162,8 +164,8 @@ ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm'}  # Указали 
 # ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # хранит количество дней, когда доступна ссылка на подтверждение регистрации
 
 # Настройки почты
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # для отправки писем на реальные почтовые адреса
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Для тестирования, печать писем в консоль.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # для отправки писем на реальные почтовые адреса
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Для тестирования, печать писем в консоль.
 EMAIL_HOST = 'smtp.yandex.ru'                                # хост почтового сервера
 EMAIL_PORT = 465                                             # порт, на который почтовый сервер принимает письма
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')          # логин пользователя почтового сервера
@@ -185,4 +187,6 @@ ADMINS = (
     ('administrator', 'servisvlg4@rambler.ru'),
 )
 
-SITE_URL = 'http://127.0.0.1:8000'
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'  # формат в котором будет выполняться рассылка
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # за сколько секунд наша функция должна выполниться
+

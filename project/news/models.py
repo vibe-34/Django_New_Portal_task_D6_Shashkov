@@ -8,6 +8,10 @@ class Record(models.Model):  # Класс публикации
     data = models.DateTimeField('Дата публикации')
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
+    def preview(self):
+        preview = f'{self.full_text[:128]}...'
+        return preview
+
     def __str__(self):
         return f'{self.title}'
 
