@@ -13,9 +13,7 @@ from django.core.mail import EmailMultiAlternatives
 @receiver(post_save, sender=Record)  # декоратор для сигналов
 def record_created(sender, instance, created, **kwargs):
     if created:
-        emails = User.objects.filter(
-            subscriptions__category=instance.category
-        ).values_list('email', flat=True)
+        emails = User.objects.filter(subscriptions__category=instance.category).values_list('email', flat=True)
 
         subject = f'Новая запись в категории {instance.category}'
 

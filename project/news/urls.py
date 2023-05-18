@@ -9,5 +9,4 @@ urlpatterns = [
     path('search/', views.SearchList.as_view(), name='search'),
     path('<int:pk>/updata', views.NewsUpdataView.as_view(), name='news_updata'),
     path('<int:pk>/delete', views.NewsDeleteView.as_view(), name='news_delete'),
-
 ]
