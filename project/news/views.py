@@ -89,8 +89,8 @@ def subscriptions(request):
             )
         )
     ).order_by('title')
-    return render(
-        request,
-        'subscriptions.html',
-        {'categories': categories_with_subscriptions},
-    )
+    return render(request, 'subscriptions.html', {'categories': categories_with_subscriptions},)
+
+
+
+

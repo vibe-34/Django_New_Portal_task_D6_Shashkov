@@ -25,6 +25,7 @@
                 <li><a href="{% url 'home' %}"><i class="bi bi-house-door"></i>Главная</a></li>
                 <li><a href="{% url 'about' %}"><i class="bi bi-universal-access"></i>Про нас</a></li>
                 <li><a href="{% url 'news_home' %}"><i class="bi bi-card-list"></i>Новости</a></li>
+                <li><a href="{% url 'subscriptions' %}"><span class='bi bi-pencil-square'></span>Оформить подписку</a></li>
                 <li><a href="{% url 'search' %}"><i class="bi bi-search"></i>Поиск</a></li>
                 <!--Теперь будем проверять не request.user.is_authenticated, а конкретные права-->
                 {% if perms.news.add_record %}
